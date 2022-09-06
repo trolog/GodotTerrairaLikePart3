@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://tileset/resources.tres" type="TileSet" id=1]
+[ext_resource path="res://scripts/TileMap.gd" type="Script" id=2]
+[ext_resource path="res://art/block_select.png" type="Texture" id=3]
+[ext_resource path="res://scripts/selector.gd" type="Script" id=4]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=7]
+
+[node name="main" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="selector" type="Sprite" parent="TileMap"]
+visible = false
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 4 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 1 )
+
+[node name="player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 56, -2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="axe" parent="player" index="0"]
+tilemap_path = NodePath("../../TileMap")
+
+[node name="Sprite" parent="player" index="1"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Camera2D" parent="player" index="3"]
+smoothing_enabled = true
+
+[editable path="player"]

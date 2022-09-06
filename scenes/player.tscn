@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://art/light.png" type="Texture" id=2]
+[ext_resource path="res://scenes/axe.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/player.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1.12375, 8.80681 )
+
+[node name="player" type="KinematicBody2D"]
+light_mask = 0
+script = ExtResource( 1 )
+
+[node name="axe" parent="." instance=ExtResource( 3 )]
+position = Vector2( -0.499846, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -3, -3 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 5.96046e-08 )
+scale = Vector2( 1.33482, 0.227097 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.3, 0.3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+
+[node name="coyote_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="coyote_timer" to="." method="_on_coyatoe_timer_timeout"]
